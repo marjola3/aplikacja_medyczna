@@ -1,13 +1,14 @@
 package model;
 
 /**
- * User: Mariola
- * Date: 16.11.13
+ * Author: Mariola
+ * Date: 25.11.13
  */
+
 public enum WorkerType {
     student("Student"),
     pracownik_fizyczny("Pracownik fizyczny"),
-    pracownik_umysłowy("Pracownik umysłowy");
+    pracownik_umyslowy("Pracownik umysłowy");
 
     private String name;
 
@@ -15,7 +16,6 @@ public enum WorkerType {
         this.name = name;
     }
 
-    @Override
     public String toString() {
         return name;
     }

@@ -6,10 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * User: Mariola
- * Date: 16.11.13
+ * Author: Mariola
+ * Date: 25.11.13
  */
-public class LeftPanel extends JPanel {
+
+public class LeftPanel extends JPanel{
+    private JTextField imieTF;
+    private JTextField nazwiskoTF;
+    private JRadioButton kobietaRB;
+    private JRadioButton mezczyznaRB;
+    private JCheckBox ubezpieczonyChB;
+    private JComboBox<WorkerType> zawodCB;
+    private ButtonGroup buttonGroup;
+
+    private JButton zapiszBtn;
+    private JButton anulujBtn;
 
     public LeftPanel() {
         setUpPanel();
@@ -22,10 +33,10 @@ public class LeftPanel extends JPanel {
 
     private void initializeComponent() {
         FormPanel formPanel = new FormPanel();
-        ButtonPanel buttonPanel = new ButtonPanel();
+        ButtonLeftPanel buttonLeftPanel = new ButtonLeftPanel();
 
         add(formPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonLeftPanel, BorderLayout.SOUTH);
     }
 
     class FormPanel extends JPanel {
@@ -33,71 +44,104 @@ public class LeftPanel extends JPanel {
         public FormPanel() {
             setUpPanel();
             initializeComponent();
-
         }
 
         private void setUpPanel() {
-            setLayout(new GridLayout(5, 2, 10, 20));
+            setLayout(new GridLayout(5,2,10,20));
             setBorder(BorderFactory.createEmptyBorder(30,10,30,10));
         }
 
         private void initializeComponent() {
             JPanel plecPanel = createPlecPanel();
 
-            JLabel imieLbl = new JLabel("Imię:");
-            JTextField imieTf = new JTextField();
-            JLabel nazwiskoLbl = new JLabel("Nazwisko:");
-            JTextField nazwiskoTf = new JTextField();
-            JLabel plecLbl = new JLabel("Płeć:");
-            JLabel ubezpieczonyLbl = new JLabel("Ubezpieczony:");
-            JCheckBox ubezpieczonyChB = new JCheckBox();
-            JLabel zawodLbl = new JLabel("Zawód:");
-            JComboBox<WorkerType> zawodCB = createJComboBox();
+            JLabel imieLbl = new JLabel("Imię");
+            imieTF = new JTextField();
+            JLabel nazwiskoLbl = new JLabel("Nazwisko");
+            nazwiskoTF = new JTextField();
+            JLabel plecLbl = new JLabel("Płeć");
+            JLabel ubezpieczonyLbl = new JLabel("Ubezpieczony");
+            ubezpieczonyChB = new JCheckBox();
+            JLabel zawodLbl = new JLabel("Zawód");
+            zawodCB = createJComboBox();
 
             add(imieLbl);
-            add(imieTf);
+            add(imieTF);
             add(nazwiskoLbl);
-            add(nazwiskoTf);
+            add(nazwiskoTF);
             add(plecLbl);
             add(plecPanel);
             add(ubezpieczonyLbl);
             add(ubezpieczonyChB);
             add(zawodLbl);
             add(zawodCB);
-
         }
 
         private JComboBox<WorkerType> createJComboBox() {
             WorkerType[] workerTypes = WorkerType.values();
-
             return new JComboBox<WorkerType>(workerTypes);
         }
 
         private JPanel createPlecPanel() {
             JPanel plecPanel = new JPanel();
-            ButtonGroup buttonGroup = new ButtonGroup();
+            buttonGroup = new ButtonGroup();
 
-            JRadioButton kobietaRb = new JRadioButton("Kobieta");
-            JRadioButton mezczyznaRb = new JRadioButton("Mężczyzna");
+            kobietaRB = new JRadioButton("Kobieta");
+            mezczyznaRB = new JRadioButton("Mężczyzna");
 
-            buttonGroup.add(kobietaRb);
-            buttonGroup.add(mezczyznaRb);
+            buttonGroup.add(kobietaRB);
+            buttonGroup.add(mezczyznaRB);
 
-            plecPanel.add(kobietaRb);
-            plecPanel.add(mezczyznaRb);
+            plecPanel.add(kobietaRB);
+            plecPanel.add(mezczyznaRB);
 
             return plecPanel;
         }
     }
 
-    class ButtonPanel extends JPanel {
-        public ButtonPanel() {
-            JButton zapiszBtn = new JButton("Zapisz");
-            JButton anulujBtn = new JButton("Anuluj");
+    class ButtonLeftPanel extends JPanel {
+
+        public ButtonLeftPanel() {
+            zapiszBtn = new JButton("Zapisz");
+            anulujBtn = new JButton("Anuluj");
 
             add(zapiszBtn);
             add(anulujBtn);
-
         }
+    }
+
+    public JTextField getImieTF() {
+        return imieTF;
+    }
+
+    public JTextField getNazwiskoTF() {
+        return nazwiskoTF;
+    }
+
+    public JRadioButton getKobietaRB() {
+        return kobietaRB;
+    }
+
+    public JRadioButton getMezczyznaRB() {
+        return mezczyznaRB;
+    }
+
+    public JCheckBox getUbezpieczonyChB() {
+        return ubezpieczonyChB;
+    }
+
+    public JComboBox<WorkerType> getZawodCB() {
+        return zawodCB;
+    }
+
+    public JButton getZapiszBtn() {
+        return zapiszBtn;
+    }
+
+    public JButton getAnulujBtn() {
+        return anulujBtn;
+    }
+
+    public ButtonGroup getButtonGroup() {
+        return buttonGroup;
     }
 }
