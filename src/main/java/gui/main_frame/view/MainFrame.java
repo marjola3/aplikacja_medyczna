@@ -20,7 +20,7 @@ public class MainFrame extends JFrame{
     }
 
     private void setUpFrame() {
-        setSize(700, 350);
+        setSize(800, 350);
         setLocationRelativeTo(null);
         setTitle("Rejestracja pacjentów");
         Util.setPlatformView();

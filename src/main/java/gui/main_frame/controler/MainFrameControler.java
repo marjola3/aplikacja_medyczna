@@ -1,5 +1,6 @@
 package gui.main_frame.controler;
 
+import gui.main_frame.model.PatientTableModel;
 import model.Patient;
 import model.Sex;
 import model.WorkerType;
@@ -30,7 +31,9 @@ public class MainFrameControler {
 
             if (isFormComplete()) {
                 Patient patient = getPatientFromFields();
-                System.out.println(patient);
+                PatientTableModel model = (PatientTableModel) tablePatient.getModel();
+                model.addPatient(patient);
+                cleanForm();
             } else {
                 JOptionPane.showMessageDialog(
                         null,
@@ -38,8 +41,6 @@ public class MainFrameControler {
                         "Informacja",
                         JOptionPane.INFORMATION_MESSAGE);
             }
-
-
         }
     }
 
@@ -63,7 +64,16 @@ public class MainFrameControler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Usuń");
+            if (tablePatient.getSelectedRow() != -1) {
+                PatientTableModel model = (PatientTableModel) tablePatient.getModel();
+                model.removePatient(tablePatient.getSelectedRow());
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Nie zaznaczono wiersza",
+                        "Informacja",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -95,10 +105,10 @@ public class MainFrameControler {
     }
 
     private Sex getSexFromFields() {
-        if (kobietaRB.isSelected()){
-           return Sex.kobieta;
+        if (kobietaRB.isSelected()) {
+            return Sex.kobieta;
         } else {
-           return Sex.mezczyzna;
+            return Sex.mezczyzna;
         }
     }
 

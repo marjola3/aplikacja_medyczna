@@ -10,11 +10,11 @@ import java.util.List;
  * User: Mariola
  * Date: 26.11.13
  */
-public class PatientTableModel extends AbstractTableModel{
+public class PatientTableModel extends AbstractTableModel {
     String[] naglowki = {"Imię i nazwisko", "Płeć", "Ubezpieczony", "Zawód"};
     List<Patient> patientList;
 
-    public PatientTableModel(){
+    public PatientTableModel() {
         patientList = new ArrayList<Patient>();
     }
 
@@ -23,6 +23,18 @@ public class PatientTableModel extends AbstractTableModel{
             this.patientList = patientList;
         } else {
             this.patientList = new ArrayList<Patient>();
+        }
+    }
+
+    public void addPatient(Patient patient) {
+        patientList.add(patient);
+        fireTableDataChanged(); // odświażanie widoku tabeli
+    }
+
+    public void removePatient(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < patientList.size()) {
+            patientList.remove(rowIndex);
+            fireTableDataChanged();
         }
     }
 
@@ -47,7 +59,7 @@ public class PatientTableModel extends AbstractTableModel{
             case 0:
                 String imie = patientList.get(rowIndex).getImie();
                 String nazwisko = patientList.get(rowIndex).getNazwisko();
-                return imie + nazwisko;
+                return imie + " " + nazwisko;
             case 1:
                 return patientList.get(rowIndex).getPlec();
             case 2:

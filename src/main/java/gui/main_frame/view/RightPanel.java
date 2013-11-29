@@ -52,16 +52,8 @@ public class RightPanel extends JPanel {
         }
 
         private void initializeComponent() {
-            Patient patient1 = new Patient("fsd", "dekkkkkkkf", Sex.kobieta, true, WorkerType.pracownik_fizyczny);
-            Patient patient2 = new Patient("fsjh", "dekjhf", Sex.kobieta, true, WorkerType.pracownik_fizyczny);
-            Patient patient3 = new Patient("fsdjkh", "dkjef", Sex.kobieta, true, WorkerType.pracownik_fizyczny);
 
-            List<Patient> patientList = new ArrayList<Patient>();
-            patientList.add(patient1);
-            patientList.add(patient2);
-            patientList.add(patient3);
-
-            PatientTableModel model = new PatientTableModel(patientList);
+            PatientTableModel model = new PatientTableModel();
             tablePatient = new JTable(model);
 
             JScrollPane jsp = new JScrollPane(tablePatient);
