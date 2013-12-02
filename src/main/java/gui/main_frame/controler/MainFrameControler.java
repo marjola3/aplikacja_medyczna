@@ -6,8 +6,10 @@ import model.Sex;
 import model.WorkerType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Author: Mariola
@@ -24,11 +26,39 @@ public class MainFrameControler {
     private JComboBox<WorkerType> zawodCB;
     private JTable tablePatient;
 
-    class ZapiszListener implements ActionListener {
+    public MainFrameControler() {
+        KeyboardFocusManager manager =
+                KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
+        manager.addKeyEventDispatcher(new MyCtrlSDispatcher());
+        manager.addKeyEventDispatcher(new MyCtrlQDispatcher());
+
+
+    }
+
+    class MyCtrlSDispatcher implements KeyEventDispatcher {
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_S  && e.isControlDown() ) {
+                System.out.println("sss");
+            }
+            return false;
+        }
+    }
+
+    class MyCtrlQDispatcher implements KeyEventDispatcher {
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_Q  && e.isControlDown()) {
+                System.exit(0);
+            }
+            return false;
+        }
+    }
+
+    class ZapiszListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
             if (isFormComplete()) {
                 Patient patient = getPatientFromFields();
                 PatientTableModel model = (PatientTableModel) tablePatient.getModel();
@@ -45,7 +75,6 @@ public class MainFrameControler {
     }
 
     class AnulujListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             cleanForm();
@@ -53,7 +82,6 @@ public class MainFrameControler {
     }
 
     class DodajListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Dodaj");
@@ -61,7 +89,6 @@ public class MainFrameControler {
     }
 
     class UsunListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             if (tablePatient.getSelectedRow() != -1) {
@@ -74,6 +101,20 @@ public class MainFrameControler {
                         "Informacja",
                         JOptionPane.INFORMATION_MESSAGE);
             }
+        }
+    }
+
+    class ZapiszMenuListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    class ZamknijMenuListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
         }
     }
 
@@ -158,5 +199,13 @@ public class MainFrameControler {
 
     public void setButtonGroup(ButtonGroup buttonGroup) {
         this.buttonGroup = buttonGroup;
+    }
+
+    public void setZapiszMenuItem(JMenuItem zapiszMenuItem) {
+        zapiszMenuItem.addActionListener(new ZapiszMenuListener());
+    }
+
+    public void setZamknijMenuItem(JMenuItem zamknijMenuItem) {
+        zamknijMenuItem.addActionListener(new ZamknijMenuListener());
     }
 }

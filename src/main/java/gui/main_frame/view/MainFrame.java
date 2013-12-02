@@ -1,10 +1,12 @@
 package gui.main_frame.view;
 
 import gui.main_frame.controler.MainFrameControler;
+import javafx.scene.input.KeyCode;
 import util.Util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Author: Mariola
@@ -13,10 +15,13 @@ import java.awt.*;
 
 public class MainFrame extends JFrame{
 
+    JMenuItem zapiszMenuItem;
+    JMenuItem zamknijMenuItem;
+
     public MainFrame() {
         setUpFrame();
-        initializeComponent();
         setMenu();
+        initializeComponent();
     }
 
     private void setUpFrame() {
@@ -47,16 +52,19 @@ public class MainFrame extends JFrame{
         mainFrameControler.setDodajBtn(rightPanel.getDodajBtn());
         mainFrameControler.setUsunBtn(rightPanel.getUsunBtn());
         mainFrameControler.setButtonGroup(leftPanel.getButtonGroup());
-
+        mainFrameControler.setZapiszMenuItem(zapiszMenuItem);
+        mainFrameControler.setZamknijMenuItem(zamknijMenuItem);
     }
 
     private void setMenu() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu menuAplikacja = new JMenu("Aplikacja");
-        JMenuItem menuItem = new JMenuItem("Zapisz");
+        JMenu plikMenu = new JMenu("Plik");
+        zapiszMenuItem = new JMenuItem("Zapisz");
+        zamknijMenuItem = new JMenuItem("Zamknij");
 
-        menuBar.add(menuAplikacja);
-        menuAplikacja.add(menuItem);
+        menuBar.add(plikMenu);
+        plikMenu.add(zapiszMenuItem);
+        plikMenu.add(zamknijMenuItem);
 
         setJMenuBar(menuBar);
     }

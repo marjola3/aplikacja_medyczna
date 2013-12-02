@@ -4,6 +4,8 @@ import model.WorkerType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Author: Mariola
@@ -56,6 +58,7 @@ public class LeftPanel extends JPanel{
 
             JLabel imieLbl = new JLabel("Imię");
             imieTF = new JTextField();
+
             JLabel nazwiskoLbl = new JLabel("Nazwisko");
             nazwiskoTF = new JTextField();
             JLabel plecLbl = new JLabel("Płeć");
