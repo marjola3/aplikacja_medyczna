@@ -32,15 +32,13 @@ public class MainFrameControler {
 
         manager.addKeyEventDispatcher(new MyCtrlSDispatcher());
         manager.addKeyEventDispatcher(new MyCtrlQDispatcher());
-
-
     }
 
     class MyCtrlSDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_S  && e.isControlDown() ) {
-                System.out.println("sss");
+                //TODO dodać zapisywanie listy pacjentów do pliku
             }
             return false;
         }
