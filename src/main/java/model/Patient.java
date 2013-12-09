@@ -1,10 +1,12 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * User: Mariola
  * Date: 19.11.13
  */
-public class Patient {
+public class Patient implements Serializable {
     private String imie;
     private String nazwisko;
     private Sex plec;

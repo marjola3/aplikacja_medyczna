@@ -32,7 +32,7 @@ public class MainFrame extends JFrame{
     }
 
     private void initializeComponent() {
-        MainFrameControler mainFrameControler = new MainFrameControler();
+        final MainFrameControler mainFrameControler = new MainFrameControler();
 
         LeftPanel leftPanel = new LeftPanel();
         RightPanel rightPanel = new RightPanel();
@@ -54,6 +54,13 @@ public class MainFrame extends JFrame{
         mainFrameControler.setButtonGroup(leftPanel.getButtonGroup());
         mainFrameControler.setZapiszMenuItem(zapiszMenuItem);
         mainFrameControler.setZamknijMenuItem(zamknijMenuItem);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                mainFrameControler.writeToFile();
+            }
+        });
     }
 
     private void setMenu() {

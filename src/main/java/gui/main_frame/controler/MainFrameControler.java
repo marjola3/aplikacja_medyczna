@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author: Mariola
@@ -37,17 +40,54 @@ public class MainFrameControler {
     class MyCtrlSDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_S  && e.isControlDown() ) {
-                //TODO dodać zapisywanie listy pacjentów do pliku
+            if (e.getKeyCode() == KeyEvent.VK_S && e.isControlDown()) {
+                writeToFile();
             }
             return false;
         }
     }
 
+    public void writeToFile() {
+        try {
+            FileOutputStream fos = new FileOutputStream("Pacjenci.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            PatientTableModel model = (PatientTableModel) tablePatient.getModel();
+            List<Patient> patientList = model.getPatientList();
+            oos.writeObject(patientList);
+            oos.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private List<Patient> readFromFile() {
+        List<Patient> patientList = null;
+
+        try {
+            FileInputStream fis = new FileInputStream("Pacjenci.dat");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            patientList = (List<Patient>) ois.readObject();
+
+            for (Patient patient : patientList) {
+                System.out.println(patient);
+            }
+
+            ois.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return patientList;
+    }
+
+
     class MyCtrlQDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_Q  && e.isControlDown()) {
+            if (e.getKeyCode() == KeyEvent.VK_Q && e.isControlDown()) {
                 System.exit(0);
             }
             return false;
@@ -185,6 +225,11 @@ public class MainFrameControler {
 
     public void setTablePatient(JTable tablePatient) {
         this.tablePatient = tablePatient;
+        PatientTableModel model = (PatientTableModel) tablePatient.getModel();
+        List<Patient> patientList = readFromFile();
+        for (Patient patient : patientList) {
+            model.addPatient(patient);
+        }
     }
 
     public void setDodajBtn(JButton dodajBtn) {

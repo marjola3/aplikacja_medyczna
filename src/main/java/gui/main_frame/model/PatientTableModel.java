@@ -70,4 +70,8 @@ public class PatientTableModel extends AbstractTableModel {
 
         return null;
     }
+
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
 }
