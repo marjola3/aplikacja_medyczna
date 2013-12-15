@@ -1,4 +1,5 @@
 import gui.main_frame.view.MainFrame;
+import model.Sex;
 
 import javax.swing.*;
 
